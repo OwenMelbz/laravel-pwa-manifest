@@ -14,6 +14,8 @@ It uses browser detection to include the approprite meta e.g Chrome and Android 
 
 4. Configure the `config/pwa_manifest.php` to your liking, including your app name, colours themes etc.
 
+5. Include within your `<head>` the blade directive `@pwaManifest` this should include the appropriate manifest per device/browser.
+
 ## Launcher images
 
 If you provide a single source image within the `icon` key - we will automatically generate and cache the icon sizes for you. Simply add your source file to somewhere accessible and we'll do the rest for you.
