@@ -1,6 +1,6 @@
 {
     "name": "owenmelbz/laravel-pwa-manifest",
-    "description": "Laravel 5.5 helper to generate PWA manifests",
+    "description": "Laravel 5.5+ helper to generate basic PWA style manifests.",
     "keywords": ["laravel", "pwa", "manifest"],
     "license": "MIT",
     "authors": [
