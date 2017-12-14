@@ -26,11 +26,14 @@ class PwaManifestServiceProvider extends ServiceProvider {
     {
         // Publish the config
         $this->publishes([
-            __DIR__.'/../config/config.php' => config_path($this->packageName.'.php'),
+            __DIR__ . '/config/config.php' => config_path($this->packageName . '.php'),
         ]);
 
         // Load the routes
-        $this->loadRoutesFromLegacy(__DIR__.'/routes.php');
+        $this->loadRoutesFromLegacy(__DIR__ . '/routes.php');
+
+        // Load the views
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'pwa_manifest');
 
         // We load the blade directive for nofollow/noindex meta tag
         Blade::directive('pwaManifest', function () {
@@ -45,7 +48,7 @@ class PwaManifestServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->mergeConfigFrom( __DIR__.'/../config/config.php', $this->packageName);
+        $this->mergeConfigFrom( __DIR__.'/config/config.php', $this->packageName);
     }
 
     protected function resource_path($filename)
