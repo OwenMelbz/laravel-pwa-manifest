@@ -27,8 +27,8 @@
     /*
     |--------------------------------------------------------------------------
     | If you set only the "icon" we will automatically generate the correct sizes
-    | If you want to set your own icons, set this to null, false or 0.
-    |
+    | based off your source image, typically around 512x512 is nice.
+    | If you want your own icons, set this to a falsy value.
     |--------------------------------------------------------------------------
     */
 
@@ -42,9 +42,9 @@
     */
 
     'icons' => [
-        '48x48' => 'launcher-1.png',
-        '96x96' => 'launcher-2.png',
-        '192x192' => 'launcher-3.png',
+        '48x48' => 'assets/img/launcher-1.png',
+        '96x96' => 'assets/img/launcher-2.png',
+        '192x192' => 'assets/img/launcher-3.png',
     ],
 
     /*
