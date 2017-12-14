@@ -33,8 +33,8 @@ class PwaManifestServiceProvider extends ServiceProvider {
         $this->loadRoutesFromLegacy(__DIR__.'/routes.php');
 
         // We load the blade directive for nofollow/noindex meta tag
-        Blade::directive('robotsMeta', function () {
-            return "<?php echo (new \OwenMelbz\PwaManifest\RobotsMeta)->render(); ?>";
+        Blade::directive('pwaManifest', function () {
+            return "<?php echo (new \OwenMelbz\PwaManifest\PwaManifestMeta)->render(); ?>";
         });
     }
 
