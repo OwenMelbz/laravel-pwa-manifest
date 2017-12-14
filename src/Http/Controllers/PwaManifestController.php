@@ -3,15 +3,20 @@
 namespace OwenMelbz\PwaManifest\Http\Controllers;
 
 use OwenMelbz\PwaManifest\PwaManifest;
+use OwenMelbz\PwaManifest\PwaLauncherIcon;
 use Illuminate\Routing\Controller;
 
 class PwaManifestController extends Controller {
 
-    public function txt()
+    public function manifestJson()
     {
         $output = (new PwaManifest)->generate();
 
-        header('Content-Type: text/plain; charset=utf-8');
-        exit($output);
+        return response()->json($output);
+    }
+
+    public function launcherIcon($size, $filename)
+    {
+        return (new PwaLauncherIcon)->generate();
     }
 }

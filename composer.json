@@ -10,11 +10,19 @@
         }
     ],
     "require": {
-        "illuminate/support": "5.*"
+        "illuminate/support": "5.*",
+        "intervention/image": "2.*"
     },
     "autoload": {
         "psr-4": {
             "OwenMelbz\\PwaManifest\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OwenMelbz\\PwaManifest\\PwaManifestServiceProvider"
+            ]
         }
     }
 }

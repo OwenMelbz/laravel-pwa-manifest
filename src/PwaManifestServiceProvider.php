@@ -15,7 +15,7 @@ class PwaManifestServiceProvider extends ServiceProvider {
     /**
      * This will be used to register config & view
      */
-    protected $packageName = 'robots_txt';
+    protected $packageName = 'pwa_manifest';
 
     /**
      * Bootstrap the application services.
@@ -27,18 +27,10 @@ class PwaManifestServiceProvider extends ServiceProvider {
         // Publish the config
         $this->publishes([
             __DIR__.'/../config/config.php' => config_path($this->packageName.'.php'),
-            __DIR__.'/resources/robots.txt' => $this->resource_path('robots.txt')
         ]);
 
         // Load the routes
         $this->loadRoutesFromLegacy(__DIR__.'/routes.php');
-
-        // We load a custom template if it exists.
-        if (file_exists($templatePath = $this->resource_path('robots.txt'))) {
-            PwaManifest::setTemplatePath($templatePath);
-        } else {
-            PwaManifest::setTemplatePath(__DIR__.'/resources/robots.txt');
-        }
 
         // We load the blade directive for nofollow/noindex meta tag
         Blade::directive('robotsMeta', function () {

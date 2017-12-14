@@ -4,47 +4,51 @@ namespace OwenMelbz\PwaManifest;
 
 class PwaManifest {
 
-    protected static $template;
-
     public function generate()
     {
-        $robots = ['User-agent: *'];
+        $basicManifest =  [
+            'name' => config('pwa_manifest.name'),
+            'short_name' => config('pwa_manifest.short_name'),
+            'start_url' => asset(config('pwa_manifest.start_url')),
+            'display' => config('pwa_manifest.display'),
+            'theme_color' => config('pwa_manifest.theme_color'),
+            'background_color' => config('pwa_manifest.background_color'),
+        ];
 
-        if ($this->shouldBlockRobots()) {
-            $robots[] = 'Disallow: /';
+        if (config('pwa_manifest.icon')) {
+            $basicManifest['icons'] = $this->generateIcons();
         } else {
-            $robots[] = 'Allow: /';
+            $basicManifest['icons'] = config('pwa_manifest.icons');
         }
 
-        $robots[] = '';
-
-        $robotTemplate = explode("\n", file_get_contents(self::getTemplatePath()));
-        $robots = array_merge($robots, $robotTemplate);
-
-        if ($this->shouldIncludeSitemap()) {
-            $robots[] = 'Sitemap: ' . asset('sitemap.xml');
-        }
-
-        return implode("\n", $robots);
+        return $basicManifest;
     }
 
-    private function shouldBlockRobots()
+    private function generateIcons()
     {
-        return config('robots_txt.block_robots') === true;
+        $fileName = ltrim(config('pwa_manifest.icon'), '/');
+
+        return [
+
+            [
+                'src' => asset('/pwa-icon/48/' . $fileName),
+                'type' => 'image/png',
+                'sizes' => '48x48'
+            ],
+
+            [
+                'src' => asset('/pwa-icon/96/' . $fileName),
+                'type' => 'image/png',
+                'sizes' => '96x96'
+            ],
+
+            [
+                'src' => asset('/pwa-icon/192/' . $fileName),
+                'type' => 'image/png',
+                'sizes' => '192x192'
+            ],
+
+        ];
     }
 
-    private function shouldIncludeSitemap()
-    {
-        return config('robots_txt.block_robots') === false && config('robots_txt.include_sitemap');
-    }
-
-    public static function setTemplatePath($path)
-    {
-        self::$template = $path;
-    }
-
-    public static function getTemplatePath()
-    {
-        return self::$template;
-    }
 }
