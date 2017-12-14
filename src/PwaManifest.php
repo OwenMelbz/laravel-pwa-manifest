@@ -18,7 +18,15 @@ class PwaManifest {
         if (config('pwa_manifest.icon')) {
             $basicManifest['icons'] = $this->generateIcons();
         } else {
-            $basicManifest['icons'] = config('pwa_manifest.icons');
+            foreach (config('pwa_manifest.icons') as $size => $file) {
+                $fileInfo = pathinfo($file);
+
+                $basicManifest['icons'][] = [
+                    'src' => asset($file),
+                    'type' => 'image/' . $fileInfo['extension'],
+                    'sizes' => $size
+                ];
+            }
         }
 
         return $basicManifest;
@@ -31,19 +39,28 @@ class PwaManifest {
         return [
 
             [
-                'src' => asset('/pwa-icon/48/' . $fileName),
+                'src' => route('pwa.icon', [
+                    'size' => 48,
+                    'filename' => $fileName
+                ]),
                 'type' => 'image/png',
                 'sizes' => '48x48'
             ],
 
             [
-                'src' => asset('/pwa-icon/96/' . $fileName),
+                'src' => route('pwa.icon', [
+                    'size' => 192,
+                    'filename' => $fileName
+                ]),
                 'type' => 'image/png',
                 'sizes' => '96x96'
             ],
 
             [
-                'src' => asset('/pwa-icon/192/' . $fileName),
+                'src' => route('pwa.icon', [
+                    'size' => 192,
+                    'filename' => $fileName
+                ]),
                 'type' => 'image/png',
                 'sizes' => '192x192'
             ],

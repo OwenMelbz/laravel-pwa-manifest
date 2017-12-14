@@ -28,10 +28,11 @@
     |--------------------------------------------------------------------------
     | If you set only the "icon" we will automatically generate the correct sizes
     | If you want to set your own icons, set this to null, false or 0.
+    |
     |--------------------------------------------------------------------------
     */
 
-    'icon' => '/launcher.png',
+    'icon' => null,
 
     /*
     |--------------------------------------------------------------------------

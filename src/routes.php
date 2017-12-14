@@ -1,4 +1,11 @@
 <?php
 
-Route::get('pwa-manifest.json', 'OwenMelbz\PwaManifest\Http\Controllers\PwaManifestController@manifestJson');
-Route::get('pwa-icon/{size}/{filename}', 'OwenMelbz\PwaManifest\Http\Controllers\PwaManifestController@launcherIcon');
+Route::group(['namespace' => 'OwenMelbz\PwaManifest\Http\Controllers'], function () {
+    Route::get('pwa-manifest.json', 'PwaManifestController@manifestJson')
+        ->name('pwa.manifest');
+
+    Route::get('pwa-icon/{size}/{filename?}', 'PwaManifestController@launcherIcon')
+        ->where('size', '(48|96|192)')
+        ->where('filename', '(.*)')
+        ->name('pwa.icon');
+});

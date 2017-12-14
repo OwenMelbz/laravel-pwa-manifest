@@ -11,7 +11,7 @@
     ],
     "require": {
         "illuminate/support": "5.*",
-        "intervention/image": "2.*"
+        "intervention/imagecache": "2.*"
     },
     "autoload": {
         "psr-4": {
